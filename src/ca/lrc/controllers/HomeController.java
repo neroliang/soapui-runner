@@ -38,8 +38,8 @@ public class HomeController {
 	}
 
 	@RequestMapping("save")
-	public String saveTopic(Model model) {
-		Result result = null; //Don't leave this in. It's only here to suppress an error message.
+	public String saveResult(Model model) throws Exception {
+		Result result = runTestSuite();
 		dao.saveResult(result);
 		List<Result> resultList = dao.getResults();
 		model.addAttribute("resultList", resultList);
