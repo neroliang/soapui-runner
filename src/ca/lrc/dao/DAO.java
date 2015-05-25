@@ -9,7 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import ca.lrc.beans.Result;
+import ca.lrc.beans.Report;
 
 public class DAO {
 	Configuration configuration = new Configuration().configure();
@@ -18,41 +18,41 @@ public class DAO {
 	SessionFactory sessionFactory = configuration
 			.buildSessionFactory(serviceRegistry);
 
-	public void saveResult(Result result) {
+	public void saveUptimeReport(Report uptimeReport) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		session.save(result);
+		session.save(uptimeReport);
 
 		session.getTransaction().commit();
 		session.close();
 	}
 
-	public List<Result> getResults() {
+	public List<Report> getReports() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Query query = session.createQuery("from Result");
-		List<Result> resultList = (List<Result>) query.list();
+		Query query = session.createQuery("from UptimeReport");
+		List<Report> uptimeReportList = (List<Report>) query.list();
 
 		session.getTransaction().commit();
 		session.close();
 
-		return resultList;
+		return uptimeReportList;
 	}
 
-	public List<Result> getResultById(int id) {
+	public List<Report> getReportById(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Query query = session.getNamedQuery("Result.byId");
+		Query query = session.getNamedQuery("UptimeReport.byId");
 		query.setInteger("id", id);
 
-		List<Result> resultList = (List<Result>) query.list();
+		List<Report> uptimeReportList = (List<Report>) query.list();
 
 		session.getTransaction().commit();
 		session.close();
 
-		return resultList;
+		return uptimeReportList;
 	}
 }

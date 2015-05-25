@@ -17,8 +17,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 @Entity
 @DynamicUpdate
 @SelectBeforeUpdate
-@NamedQuery(name = "Result.byId", query = "from Result where id=:id")
-public class Result implements Serializable {
+@NamedQuery(name = "Report.byId", query = "from Report where id=:id")
+public class Report implements Serializable {
 	private static final long serialVersionUID = 2140144763025238325L;
 
 	@Id
@@ -26,7 +26,7 @@ public class Result implements Serializable {
 	private int id;
 
 	@ElementCollection
-	private List<Service> statusList = new ArrayList<Service>();
+	private List<TestCaseResult> testCaseResultList = new ArrayList<TestCaseResult>();
 
 	private Calendar timestamp = Calendar.getInstance();
 
@@ -38,12 +38,12 @@ public class Result implements Serializable {
 		this.id = id;
 	}
 
-	public List<Service> getStatusList() {
-		return statusList;
+	public List<TestCaseResult> getTestCaseResultList() {
+		return testCaseResultList;
 	}
 
-	public void setStatusList(List<Service> statusList) {
-		this.statusList = statusList;
+	public void setTestCaseResultList(List<TestCaseResult> testCaseResultList) {
+		this.testCaseResultList = testCaseResultList;
 	}
 
 	public Calendar getTimestamp() {
@@ -54,13 +54,11 @@ public class Result implements Serializable {
 		this.timestamp = timestamp;
 	}
 
-	public Result() {
+	public Report() {
 	}
 
-	public Result(int id, List<Service> statusList, Calendar timestamp) {
-		this.id = id;
-		this.statusList = statusList;
-		this.timestamp = timestamp;
+	public Report(List<TestCaseResult> testCaseResultList) {
+		this.testCaseResultList = testCaseResultList;
 	}
 
 }
