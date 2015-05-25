@@ -31,9 +31,10 @@ public class SoapUIHandler {
 					.getName());
 			testRunner = project.getTestSuiteAt(0).getTestCaseAt(i)
 					.run(new PropertiesMap(), false);
-			System.out.println(testRunner.getStatus().toString());
 			if (testRunner.getStatus() == Status.FAILED) {
 				service.setSuccessFlag(false);
+				service.setReasonForFailing(testRunner.getReason());
+				System.out.println("Current test failed. Reason: " + service.getReasonForFailing());
 			}
 			statusList.add(service);
 			System.out.println("Current service: " + service.getName() + "\nUptime status: " + service.getSuccessFlag());

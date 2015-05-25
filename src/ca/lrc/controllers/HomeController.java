@@ -12,28 +12,28 @@ import ca.lrc.dao.DAO;
 
 @Controller
 public class HomeController {
-	DAO dao = new DAO();
+	// DAO dao = new DAO();
 
 	@RequestMapping("/")
 	public String showHome(Model model) {
-		List<Report> reportList = dao.getReports();
-		model.addAttribute("reportList", reportList);
+/*		List<Report> reportList = dao.getReports();
+		model.addAttribute("reportList", reportList);*/
 		return "home";
 	}
 
-	@RequestMapping(value = "view/{id}")
+/*	@RequestMapping(value = "view/{id}")
 	public String viewReport(Model model, @PathVariable int id) {
 		Report report = dao.getReportById(id).get(0);
 		model.addAttribute("reportList", report);
 		return "display-report";
-	}
+	}*/
 
-	@RequestMapping("save")
-	public String saveReport(Model model) throws Exception {
+	@RequestMapping("new")
+	public String newReport(Model model) throws Exception {
 		Report report = SoapUIHandler.runTestSuite();
-		dao.saveUptimeReport(report);
-		List<Report> reportList = dao.getReports();
-		model.addAttribute("reportList", reportList);
+/*		dao.saveUptimeReport(report);
+		List<Report> reportList = dao.getReports();*/
+		model.addAttribute("report", report);
 		return "home";
 	}
 	
