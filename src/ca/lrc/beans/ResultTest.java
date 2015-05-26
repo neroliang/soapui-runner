@@ -7,13 +7,13 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestCaseResultTest {
+public class ResultTest {
 
-	private TestCaseResult testCaseResult;
+	private Result testCaseResult;
 
 	@Before
 	public void setUp() throws Exception {
-		testCaseResult = new TestCaseResult();
+		testCaseResult = new Result();
 	}
 	
 	@Test

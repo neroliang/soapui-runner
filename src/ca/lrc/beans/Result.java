@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class TestCaseResult implements Serializable {
+public class Result implements Serializable {
 	private static final long serialVersionUID = 835075094502273267L;
 	private String name;
 	private boolean successFlag;
@@ -35,10 +35,10 @@ public class TestCaseResult implements Serializable {
 		this.reasonForFailing = reasonForFailing;
 	}
 
-	public TestCaseResult() {
+	public Result() {
 	}
 
-	public TestCaseResult(String name, boolean successFlag,
+	public Result(String name, boolean successFlag,
 			String reasonForFailing) {
 		this.name = name;
 		this.successFlag = successFlag;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ca.lrc.beans.Report;
 import ca.lrc.dao.DAO;
+import ca.lrc.services.SoapUIHandler;
 
 @Controller
 public class HomeController {
@@ -30,7 +31,7 @@ public class HomeController {
 
 	@RequestMapping("new")
 	public String newReport(Model model) throws Exception {
-		Report report = SoapUIHandler.runTestSuite();
+		Report report = SoapUIHandler.runTests();
 /*		dao.saveUptimeReport(report);
 		List<Report> reportList = dao.getReports();*/
 		model.addAttribute("report", report);

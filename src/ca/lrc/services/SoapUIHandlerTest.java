@@ -1,4 +1,4 @@
-package ca.lrc.controllers;
+package ca.lrc.services;
 
 import static org.junit.Assert.*;
 
@@ -11,26 +11,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ca.lrc.beans.Report;
-import ca.lrc.beans.TestCaseResult;
+import ca.lrc.beans.Result;
 
 public class SoapUIHandlerTest {
-	private List<TestCaseResult> testTestCaseResultList;
+	private List<Result> testTestCaseResultList;
 	private Report expectedReport;
 
 	@Test
 	public void testRunTestSuite() throws Exception {
 		expectedReport = new Report();
-		testTestCaseResultList = new ArrayList<TestCaseResult>();
-		Collections.addAll(testTestCaseResultList, new TestCaseResult("CommonLookup",
-				true, null), new TestCaseResult("EasrInternal", true, null), new TestCaseResult(
+		testTestCaseResultList = new ArrayList<Result>();
+		Collections.addAll(testTestCaseResultList, new Result("CommonLookup",
+				true, null), new Result("EasrInternal", true, null), new Result(
 				"EasrSubmission", true, null),
-				new TestCaseResult("ManageFormTemplate", true, null), new TestCaseResult(
-						"PaymentInternal", true, null), new TestCaseResult("Site", true, null),
-				new TestCaseResult("CamsManagement", true, null), new TestCaseResult("CamsProfile",
-						true, null), new TestCaseResult("EcmManagement", true, null), new TestCaseResult(
+				new Result("ManageFormTemplate", true, null), new Result(
+						"PaymentInternal", true, null), new Result("Site", true, null),
+				new Result("CamsManagement", true, null), new Result("CamsProfile",
+						true, null), new Result("EcmManagement", true, null), new Result(
 						"ExternalSecurity", true, null));
 		expectedReport.setTestCaseResultList(testTestCaseResultList);
-		Report actualUptimeReport = SoapUIHandler.runTestSuite();
+		Report actualUptimeReport = SoapUIHandler.runTests();
 
 		boolean flag = true;
 		System.out.println("Now comparing actual result against expected result. If no error messages are thrown, all is well.");
