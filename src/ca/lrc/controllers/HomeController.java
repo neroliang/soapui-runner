@@ -1,19 +1,24 @@
 package ca.lrc.controllers;
 
-import java.util.List;
+import javax.servlet.ServletContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ca.lrc.beans.Report;
-import ca.lrc.dao.DAO;
 import ca.lrc.services.SoapUIHandler;
+
+import com.eviware.soapui.impl.wsdl.WsdlProject;
 
 @Controller
 public class HomeController {
 	// DAO dao = new DAO();
+	private SoapUIHandler handler = new SoapUIHandler();
+	
+	@Autowired
+	ServletContext servletContext;
 
 	@RequestMapping("/")
 	public String showHome(Model model) {
@@ -29,9 +34,11 @@ public class HomeController {
 		return "display-report";
 	}*/
 
-	@RequestMapping("new")
-	public String newReport(Model model) throws Exception {
-		Report report = SoapUIHandler.runTests();
+	@RequestMapping("new-report")
+	public String runReport(Model model) throws Exception {
+		WsdlProject project = new WsdlProject(
+				servletContext.getRealPath("/ServiceUptime-soapui-project.xml"));
+		Report report = handler.runTests(project);
 /*		dao.saveUptimeReport(report);
 		List<Report> reportList = dao.getReports();*/
 		model.addAttribute("report", report);

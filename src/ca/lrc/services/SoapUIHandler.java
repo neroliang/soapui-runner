@@ -15,13 +15,12 @@ import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
 
 public class SoapUIHandler {
-	public static Report runTests() throws Exception {
+	public Report runTests(WsdlProject project) throws Exception {
 		Report report = new Report();
 
 		TestCaseRunner runner = null;
 		SoapUI.setSoapUICore(new StandaloneSoapUICore(true));
-		WsdlProject project = new WsdlProject(
-				"ServiceUptime-soapui-project.xml");
+
 		List<Result> resultList = new ArrayList<Result>();
 
 		for (int i = 0; i < project.getTestSuiteAt(0).getTestCaseList().size(); i++) {
