@@ -16,3 +16,6 @@ ServiceUptime-soapui-project.xml
 
 # Hibernate configuration file containing login credentials for remote database
 src/hibernate.cfg.xml
+
+# Log files
+soapui*.log
