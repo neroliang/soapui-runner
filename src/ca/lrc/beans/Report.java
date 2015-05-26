@@ -26,7 +26,7 @@ public class Report implements Serializable {
 	private int id;
 
 	@ElementCollection
-	private List<Result> testCaseResultList = new ArrayList<Result>();
+	private List<Result> resultList = new ArrayList<Result>();
 
 	private Calendar timestamp = Calendar.getInstance();
 
@@ -38,12 +38,12 @@ public class Report implements Serializable {
 		this.id = id;
 	}
 
-	public List<Result> getTestCaseResultList() {
-		return testCaseResultList;
+	public List<Result> getResultList() {
+		return resultList;
 	}
 
-	public void setTestCaseResultList(List<Result> testCaseResultList) {
-		this.testCaseResultList = testCaseResultList;
+	public void setResultList(List<Result> resultList) {
+		this.resultList = resultList;
 	}
 
 	public Calendar getTimestamp() {
@@ -57,8 +57,8 @@ public class Report implements Serializable {
 	public Report() {
 	}
 
-	public Report(List<Result> testCaseResultList) {
-		this.testCaseResultList = testCaseResultList;
+	public Report(List<Result> resultList) {
+		this.resultList = resultList;
 	}
 
 }

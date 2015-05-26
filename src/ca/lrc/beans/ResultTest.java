@@ -9,34 +9,34 @@ import org.junit.Test;
 
 public class ResultTest {
 
-	private Result testCaseResult;
+	private Result result;
 
 	@Before
 	public void setUp() throws Exception {
-		testCaseResult = new Result();
+		result = new Result();
 	}
 	
 	@Test
 	public void testSetAndGetName() {
 		String testName = "aName";
-		assertNull(testCaseResult.getName());
-		testCaseResult.setName(testName);
-		assertEquals(testName, testCaseResult.getName());
+		assertNull(result.getName());
+		result.setName(testName);
+		assertEquals(testName, result.getName());
 	}
 	
 	@Test
 	public void testSetAndGetSuccessFlag() {
 		boolean testSuccessFlag = true;
-		assertFalse(testCaseResult.getSuccessFlag());
-		testCaseResult.setSuccessFlag(testSuccessFlag);
-		assertEquals(testSuccessFlag, testCaseResult.getSuccessFlag());
+		assertFalse(result.getSuccessFlag());
+		result.setSuccessFlag(testSuccessFlag);
+		assertEquals(testSuccessFlag, result.getSuccessFlag());
 	}
 	
 	@Test
 	public void testGetAndSetReasonForFailing() {
 		String testReasonForFailing = "aReasonForFailing";
-		assertNull(testCaseResult.getReasonForFailing());
-		testCaseResult.setReasonForFailing(testReasonForFailing);
-		assertEquals(testReasonForFailing, testCaseResult.getReasonForFailing());
+		assertNull(result.getReasonForFailing());
+		result.setReasonForFailing(testReasonForFailing);
+		assertEquals(testReasonForFailing, result.getReasonForFailing());
 	}
 }

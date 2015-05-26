@@ -20,29 +20,29 @@ public class SoapUIHandler {
 
 		TestCaseRunner runner = null;
 		SoapUI.setSoapUICore(new StandaloneSoapUICore(true));
-
-		WsdlProject project = new WsdlProject("ServiceUptime-soapui-project.xml");
-
+		WsdlProject project = new WsdlProject(
+				"ServiceUptime-soapui-project.xml");
 		List<Result> resultList = new ArrayList<Result>();
 
 		for (int i = 0; i < project.getTestSuiteAt(0).getTestCaseList().size(); i++) {
 			Result result = new Result();
 			result.setSuccessFlag(true);
-			result.setName(project.getTestSuiteAt(0).getTestCaseAt(i)
-					.getName());
+			result.setName(project.getTestSuiteAt(0).getTestCaseAt(i).getName());
 			runner = project.getTestSuiteAt(0).getTestCaseAt(i)
 					.run(new PropertiesMap(), false);
 			if (runner.getStatus() == Status.FAILED) {
 				result.setSuccessFlag(false);
-				result.setReasonForFailing(Arrays.toString(runner.getResults().get(0).getMessages()));
-				System.out.println("Current test failed. Reason: " + result.getReasonForFailing());
+				result.setReasonForFailing(Arrays.toString(runner.getResults()
+						.get(0).getMessages()));
+				// System.out.println("Current test failed. Reason: " +
+				// result.getReasonForFailing());
 			}
 			resultList.add(result);
-			System.out.println("Current service: " + result.getName() + "\nUptime status: " + result.getSuccessFlag());
+			// System.out.println("Current service: " + result.getName() +
+			// "\nUptime status: " + result.getSuccessFlag());
 		}
 
-		report.setTestCaseResultList(resultList);
-
+		report.setResultList(resultList);
 		return report;
 	}
 }

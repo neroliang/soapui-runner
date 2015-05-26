@@ -14,14 +14,14 @@ import ca.lrc.beans.Report;
 import ca.lrc.beans.Result;
 
 public class SoapUIHandlerTest {
-	private List<Result> testTestCaseResultList;
+	private List<Result> testResultList;
 	private Report expectedReport;
 
 	@Test
 	public void testRunTestSuite() throws Exception {
 		expectedReport = new Report();
-		testTestCaseResultList = new ArrayList<Result>();
-		Collections.addAll(testTestCaseResultList, new Result("CommonLookup",
+		testResultList = new ArrayList<Result>();
+		Collections.addAll(testResultList, new Result("CommonLookup",
 				true, null), new Result("EasrInternal", true, null), new Result(
 				"EasrSubmission", true, null),
 				new Result("ManageFormTemplate", true, null), new Result(
@@ -29,22 +29,22 @@ public class SoapUIHandlerTest {
 				new Result("CamsManagement", true, null), new Result("CamsProfile",
 						true, null), new Result("EcmManagement", true, null), new Result(
 						"ExternalSecurity", true, null));
-		expectedReport.setTestCaseResultList(testTestCaseResultList);
-		Report actualUptimeReport = SoapUIHandler.runTests();
+		expectedReport.setResultList(testResultList);
+		Report actualReport = SoapUIHandler.runTests();
 
 		boolean flag = true;
 		System.out.println("Now comparing actual result against expected result. If no error messages are thrown, all is well.");
 		//Only works as intended if the status list in the actualResult object is ordered the same as that in the expectedResult object.
-		for (int i = 0; i < actualUptimeReport.getTestCaseResultList().size(); i++) {
-			if ((expectedReport.getTestCaseResultList().get(i).getName() != actualUptimeReport
-					.getTestCaseResultList().get(i).getName())
-					&& (expectedReport.getTestCaseResultList().get(i).getSuccessFlag() != actualUptimeReport
-							.getTestCaseResultList().get(i).getSuccessFlag())) {
+		for (int i = 0; i < actualReport.getResultList().size(); i++) {
+			if ((expectedReport.getResultList().get(i).getName() != actualReport
+					.getResultList().get(i).getName())
+					&& (expectedReport.getResultList().get(i).getSuccessFlag() != actualReport
+							.getResultList().get(i).getSuccessFlag())) {
 				flag = false;
-				System.out.println("Error! " + actualUptimeReport.getTestCaseResultList().get(i).getName() + " actual result does not match expected result.");
+				System.out.println("Error! " + actualReport.getResultList().get(i).getName() + " actual result does not match expected result.");
 			}
 		}
 		
-		assertTrue("Expected result does not match actual result.", flag == true);
+		assertTrue("Expected report does not match actual report.", flag == true);
 	}
 }
