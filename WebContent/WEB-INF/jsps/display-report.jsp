@@ -36,6 +36,20 @@
 		</div>
 		</nav>
 		<div class="docs-section">
+			<form>
+				<div class="row">
+					<div class="six columns">
+						<label for="environmentInput">Environments</label> <select
+							class="u-full-width" id="exampleRecipientInput">
+							<option value="dev">Development</option>
+							<option value="uat">User Acceptance Testing</option>
+							<option value="prod">Production</option>
+						</select>
+					</div>
+				</div>
+				<input class="button-primary" value="Submit" type="submit">
+
+			</form>
 			<table class="u-full-width">
 				<thead>
 					<tr>
