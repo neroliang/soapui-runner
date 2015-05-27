@@ -60,4 +60,9 @@ public class HomeController {
 		model.addAttribute("resultList", resultList);
 		return "display-report";
 	}
+	
+	@RequestMapping("run-custom-report")
+	public String showUploadProject(Model model) {
+		return "upload-project";
+	}
 }
