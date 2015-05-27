@@ -36,10 +36,10 @@
 		</div>
 		</nav>
 		<div class="docs-section">
-			<form method="POST" enctype="multipart/form-data" action="/upload">
-				File to upload: <input type="file" name="file"><br /> Name:
-				<input type="text" name="name"><br /> <br /> <input
-					type="submit" value="Upload"> Press here to upload the
+			<form method="POST" enctype="multipart/form-data" action="upload">
+				File to upload: <input type="file" name="file" required /><br /> Name:
+				<input type="text" name="name" required /><br /> <br /> <input
+					type="submit" value="Upload" /> Press here to upload the
 				file!
 			</form>
 		</div>
