@@ -30,7 +30,7 @@ public class HomeController {
 		 * List<Report> reportList = dao.getReports();
 		 * model.addAttribute("reportList", reportList);
 		 */
-		return "display-report";
+		return "home";
 	}
 
 	/*
@@ -40,7 +40,7 @@ public class HomeController {
 	 * return "display-report"; }
 	 */
 
-	@RequestMapping("new-report")
+	@RequestMapping("new-uptime-report")
 	public String runReport(Model model) throws Exception {
 		WsdlProject project = new WsdlProject(
 				servletContext.getRealPath("/ServiceUptime-soapui-project.xml"));

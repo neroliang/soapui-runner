@@ -31,7 +31,7 @@
 				<li class="navbar-item"><a class="navbar-link"
 					href="<c:url value="/" />">Home</a></li>
 				<li class="navbar-item"><a class="navbar-link"
-					href="<c:url value="/new-report" />">New Report</a></li>
+					href="<c:url value="/new-uptime-report" />">New Report</a></li>
 			</ul>
 		</div>
 		</nav>

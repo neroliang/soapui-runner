@@ -36,7 +36,7 @@
 		</div>
 		</nav>
 		<div class="docs-section">
-			<p>To do</p>
+			
 		</div>
 	</div>
 </body>
