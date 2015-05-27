@@ -20,9 +20,7 @@
 <body>
 	<div class="container">
 		<section class="header">
-		<h1 class="title">
-			SoapUI Runner
-			</h2>
+		<h2 class="title">SoapUI Runner</h2>
 		</section>
 		<div class="navbar-spacer"></div>
 		<nav class="navbar">
@@ -32,11 +30,18 @@
 					href="<c:url value="/" />">Home</a></li>
 				<li class="navbar-item"><a class="navbar-link"
 					href="<c:url value="/new-uptime-report" />">New Report</a></li>
+				<li class="navbar-item"><a class="navbar-link"
+					href="<c:url value="/run-custom-report" />">Run Custom Report</a></li>
 			</ul>
 		</div>
 		</nav>
 		<div class="docs-section">
-			
+			<form method="POST" enctype="multipart/form-data" action="/upload">
+				File to upload: <input type="file" name="file"><br /> Name:
+				<input type="text" name="name"><br /> <br /> <input
+					type="submit" value="Upload"> Press here to upload the
+				file!
+			</form>
 		</div>
 	</div>
 </body>

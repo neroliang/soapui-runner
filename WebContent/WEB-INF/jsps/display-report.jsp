@@ -20,7 +20,7 @@
 <body>
 	<div class="container">
 		<section class="header">
-		<h1 class="title">
+		<h2 class="title">
 			SoapUI Runner
 			</h2>
 		</section>
@@ -32,6 +32,8 @@
 					href="<c:url value="/" />">Home</a></li>
 				<li class="navbar-item"><a class="navbar-link"
 					href="<c:url value="/new-uptime-report" />">New Report</a></li>
+				<li class="navbar-item"><a class="navbar-link"
+					href="<c:url value="/run-custom-report" />">Run Custom Report</a></li>
 			</ul>
 		</div>
 		</nav>
