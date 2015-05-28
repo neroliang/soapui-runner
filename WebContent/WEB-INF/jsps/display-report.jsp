@@ -38,6 +38,20 @@
 		</div>
 		</nav>
 		<div class="docs-section">
+			<c:url value="/processEnvironmentSelection" var="url" />
+			<form:form commandName="environment" method="GET" action="${url}">
+				<div class="row">
+					<div class="six columns">
+						<label for="environmentInput">Environments</label>
+						<form:select className="u-full-width" path="selection">
+							<form:option value="dev">Development</form:option>
+							<form:option value="uat">User Acceptance Testing</form:option>
+							<form:option value="prod">Production</form:option>
+						</form:select>
+					</div>
+				</div>
+				<input class="button-primary" value="Submit" type="submit">
+			</form:form>
 			<table class="u-full-width">
 				<thead>
 					<tr>

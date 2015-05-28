@@ -1,20 +1,25 @@
 package ca.lrc.controllers;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.xmlbeans.XmlException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import ca.lrc.beans.Environment;
 import ca.lrc.beans.Report;
 import ca.lrc.beans.Result;
 import ca.lrc.services.SoapUIHandler;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
+import com.eviware.soapui.support.SoapUIException;
 
 @Controller
 public class HomeController {
@@ -41,8 +46,8 @@ public class HomeController {
 	 */
 
 	@RequestMapping("new-uptime-report")
-	public String runReport(Model model) throws Exception {
-		WsdlProject project = new WsdlProject(
+	public String showDisplayReport(Model model) throws Exception {
+/*		WsdlProject project = new WsdlProject(
 				servletContext.getRealPath("/ServiceUptime-soapui-project.xml"));
 		Report report = handler.runTests(project);
 		System.out.println("Report done running");
@@ -53,16 +58,48 @@ public class HomeController {
 					+ "\n Reason for failing: "
 					+ resultList.get(i).getReasonForFailing());
 		}
-		/*
-		 * dao.saveUptimeReport(report); List<Report> reportList =
-		 * dao.getReports();
-		 */
-		model.addAttribute("resultList", resultList);
+		model.addAttribute("resultList", resultList);*/
+		
+		Environment environment = new Environment();
+		model.addAttribute("environment", environment);
 		return "display-report";
 	}
 	
-	@RequestMapping("run-custom-report")
-	public String showUploadProject(Model model) {
-		return "upload-project";
+	@RequestMapping(value="processEnvironmentSelection", method=RequestMethod.GET)
+	public String processEnvironmentSelection(Model model, @ModelAttribute Environment environment) throws Exception {
+		String userChoice = environment.getSelection();
+		if (userChoice.equals("dev")) {
+			System.out.println("SoapUI project for development environment hasn't been acquired yet.");
+		}
+		
+		else if (userChoice.equals("uat")) {
+			model.addAttribute("resultList", createUptimeReport("/ServiceUptime-soapui-project.xml"));
+		}
+		
+		else if (userChoice.equals("prod")) {
+			System.out.println("SoapUI project for production environment hasn't been acquired yet.");
+		}
+		
+		else {
+			System.out.println("How in the hell did you trigger this statement?");
+		}
+		return "display-report";
 	}
+	
+	public List<Result> createUptimeReport(String url) throws Exception {
+		WsdlProject project = new WsdlProject(
+				servletContext.getRealPath(url));
+		Report report = handler.runTests(project);
+		System.out.println("Report done running");
+		List<Result> resultList = report.getResultList();
+		for (int i = 0; i < resultList.size(); i++) {
+			System.out.println("\nName: " + resultList.get(i).getName()
+					+ "\n Success flag: " + resultList.get(i).getSuccessFlag()
+					+ "\n Reason for failing: "
+					+ resultList.get(i).getReasonForFailing());
+		}
+		return resultList;
+	}
+	
+	
 }
