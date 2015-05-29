@@ -1,11 +1,11 @@
 package ca.lrc.controllers;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.apache.xmlbeans.XmlException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +19,12 @@ import ca.lrc.beans.Result;
 import ca.lrc.services.SoapUIHandler;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
-import com.eviware.soapui.support.SoapUIException;
 
 @Controller
 public class HomeController {
 	// DAO dao = new DAO();
+	final static Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	private SoapUIHandler handler = new SoapUIHandler();
 
 	@Autowired
