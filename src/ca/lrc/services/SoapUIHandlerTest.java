@@ -26,13 +26,13 @@ public class SoapUIHandlerTest {
 		testResultList = new ArrayList<Result>();
 		handler = new SoapUIHandler();
 		Collections.addAll(testResultList, new Result("CommonLookup", true,
-				null), new Result("EasrInternal", true, null), new Result(
-				"EasrSubmission", true, null), new Result("ManageFormTemplate",
-				true, null), new Result("PaymentInternal", true, null),
-				new Result("Site", true, null), new Result("CamsManagement",
-						true, null), new Result("CamsProfile", true, null),
-				new Result("EcmManagement", true, null), new Result(
-						"ExternalSecurity", true, null));
+				null, null), new Result("EasrInternal", true, null, null), new Result(
+				"EasrSubmission", true, null, null), new Result("ManageFormTemplate",
+				true, null, null), new Result("PaymentInternal", true, null, null),
+				new Result("Site", true, null, null), new Result("CamsManagement",
+						true, null, null), new Result("CamsProfile", true, null, null),
+				new Result("EcmManagement", true, null, null), new Result(
+						"ExternalSecurity", true, null, null));
 		expectedReport.setResultList(testResultList);
 		Report actualReport = handler.runTests(project);
 

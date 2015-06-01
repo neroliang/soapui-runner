@@ -1,5 +1,7 @@
 package ca.lrc.services;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +19,8 @@ import com.eviware.soapui.model.testsuite.TestRunner.Status;
 public class SoapUIHandler {
 	public Report runTests(WsdlProject project) throws Exception {
 		Report report = new Report();
+		File file;
+		PrintWriter pw;
 
 		TestCaseRunner runner = null;
 		SoapUI.setSoapUICore(new StandaloneSoapUICore(true));
@@ -33,12 +37,14 @@ public class SoapUIHandler {
 				result.setSuccessFlag(false);
 				result.setReasonForFailing(Arrays.toString(runner.getResults()
 						.get(0).getMessages()));
-				// System.out.println("Current test failed. Reason: " +
-				// result.getReasonForFailing());
+				result.setLogName(result.getName() + "-" + runner.getResults().get(0).getTimeStamp() + ".txt");
+				file = new File(result.getLogName());
+				pw = new PrintWriter(file);
+				runner.getResults().get(0).writeTo(pw);
+				pw.flush();
+				pw.close();
 			}
 			resultList.add(result);
-			// System.out.println("Current service: " + result.getName() +
-			// "\nUptime status: " + result.getSuccessFlag());
 		}
 
 		report.setResultList(resultList);

@@ -10,6 +10,7 @@ public class Result implements Serializable {
 	private String name;
 	private boolean successFlag;
 	private String reasonForFailing;
+	private String logName;
 
 	public String getName() {
 		return name;
@@ -35,14 +36,23 @@ public class Result implements Serializable {
 		this.reasonForFailing = reasonForFailing;
 	}
 
+	public String getLogName() {
+		return logName;
+	}
+
+	public void setLogName(String logName) {
+		this.logName = logName;
+	}
+
 	public Result() {
 	}
 
-	public Result(String name, boolean successFlag,
-			String reasonForFailing) {
+	public Result(String name, boolean successFlag, String reasonForFailing,
+			String logName) {
 		this.name = name;
 		this.successFlag = successFlag;
 		this.reasonForFailing = reasonForFailing;
+		this.logName = logName;
 	}
 
 }
