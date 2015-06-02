@@ -1,4 +1,4 @@
-package ca.lrc.services;
+package ca.lrc.wrappers;
 
 import static org.junit.Assert.assertTrue;
 
@@ -13,10 +13,10 @@ import com.eviware.soapui.impl.wsdl.WsdlProject;
 import ca.lrc.beans.Report;
 import ca.lrc.beans.Result;
 
-public class SoapUIHandlerTest {
+public class SoapUIWrapperTest {
 	private List<Result> testResultList;
 	private Report expectedReport;
-	private SoapUIHandler handler;
+	private SoapUIWrapper handler;
 	private WsdlProject project;
 
 	@Test
@@ -24,15 +24,15 @@ public class SoapUIHandlerTest {
 		project = new WsdlProject("ServiceUptime-soapui-project.xml");
 		expectedReport = new Report();
 		testResultList = new ArrayList<Result>();
-		handler = new SoapUIHandler();
+		handler = new SoapUIWrapper();
 		Collections.addAll(testResultList, new Result("CommonLookup", true,
-				null, null), new Result("EasrInternal", true, null, null), new Result(
-				"EasrSubmission", true, null, null), new Result("ManageFormTemplate",
-				true, null, null), new Result("PaymentInternal", true, null, null),
-				new Result("Site", true, null, null), new Result("CamsManagement",
-						true, null, null), new Result("CamsProfile", true, null, null),
-				new Result("EcmManagement", true, null, null), new Result(
-						"ExternalSecurity", true, null, null));
+				null), new Result("EasrInternal", true, null), new Result(
+				"EasrSubmission", true, null), new Result("ManageFormTemplate",
+				true, null), new Result("PaymentInternal", true, null),
+				new Result("Site", true, null), new Result("CamsManagement",
+						true, null), new Result("CamsProfile", true, null),
+				new Result("EcmManagement", true, null), new Result(
+						"ExternalSecurity", true, null));
 		expectedReport.setResultList(testResultList);
 		Report actualReport = handler.runTests(project);
 
@@ -42,16 +42,16 @@ public class SoapUIHandlerTest {
 		// Only works as intended if the status list in the actualResult object
 		// is ordered the same as that in the expectedResult object.
 		for (int i = 0; i < actualReport.getResultList().size(); i++) {
-			if ((expectedReport.getResultList().get(i).getName() != actualReport
-					.getResultList().get(i).getName())
+			if ((expectedReport.getResultList().get(i).getTestCaseName() != actualReport
+					.getResultList().get(i).getTestCaseName())
 					&& (expectedReport.getResultList().get(i).getSuccessFlag() != actualReport
 							.getResultList().get(i).getSuccessFlag())) {
 				flag = false;
-				System.out.println("Error! "
-						+ actualReport.getResultList().get(i).getName()
-						+ " test case failed because of the following reason: "
-						+ actualReport.getResultList().get(i)
-								.getReasonForFailing());
+				System.out
+						.println("Error! "
+								+ actualReport.getResultList().get(i)
+										.getTestCaseName()
+								+ " test case failed. Check the relevant log for more details.");
 			}
 		}
 

@@ -1,4 +1,4 @@
-package ca.lrc.services;
+package ca.lrc.wrappers;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import com.eviware.soapui.model.support.PropertiesMap;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
 
-public class SoapUIHandler {
+public class SoapUIWrapper {
 	public Report runTests(WsdlProject project) throws Exception {
 		Report report = new Report();
 		File file;
@@ -30,14 +30,12 @@ public class SoapUIHandler {
 		for (int i = 0; i < project.getTestSuiteAt(0).getTestCaseList().size(); i++) {
 			Result result = new Result();
 			result.setSuccessFlag(true);
-			result.setName(project.getTestSuiteAt(0).getTestCaseAt(i).getName());
+			result.setTestCaseName(project.getTestSuiteAt(0).getTestCaseAt(i).getName());
 			runner = project.getTestSuiteAt(0).getTestCaseAt(i)
 					.run(new PropertiesMap(), false);
 			if (runner.getStatus() == Status.FAILED) {
 				result.setSuccessFlag(false);
-				result.setReasonForFailing(Arrays.toString(runner.getResults()
-						.get(0).getMessages()));
-				result.setLogName(result.getName() + "-" + runner.getResults().get(0).getTimeStamp() + ".txt");
+				result.setLogName(result.getTestCaseName() + "-" + runner.getResults().get(0).getTimeStamp() + ".txt");
 				file = new File(result.getLogName());
 				pw = new PrintWriter(file);
 				runner.getResults().get(0).writeTo(pw);

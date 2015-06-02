@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ca.lrc.beans.Environment;
 import ca.lrc.beans.Report;
 import ca.lrc.beans.Result;
-import ca.lrc.services.SoapUIHandler;
+import ca.lrc.wrappers.SoapUIWrapper;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 
@@ -22,41 +22,18 @@ import com.eviware.soapui.impl.wsdl.WsdlProject;
 public class HomeController {
 	// DAO dao = new DAO();
 
-	private SoapUIHandler handler = new SoapUIHandler();
+	private SoapUIWrapper handler = new SoapUIWrapper();
 
 	@Autowired
 	ServletContext servletContext;
 
 	@RequestMapping("/")
 	public String showHome(Model model) {
-		/*
-		 * List<Report> reportList = dao.getReports();
-		 * model.addAttribute("reportList", reportList);
-		 */
 		return "home";
 	}
 
-	/*
-	 * @RequestMapping(value = "view/{id}") public String viewReport(Model
-	 * model, @PathVariable int id) { Report report =
-	 * dao.getReportById(id).get(0); model.addAttribute("reportList", report);
-	 * return "display-report"; }
-	 */
-
 	@RequestMapping("new-uptime-report")
 	public String showDisplayReport(Model model) throws Exception {
-		/*
-		 * WsdlProject project = new WsdlProject(
-		 * servletContext.getRealPath("/ServiceUptime-soapui-project.xml"));
-		 * Report report = handler.runTests(project);
-		 * System.out.println("Report done running"); List<Result> resultList =
-		 * report.getResultList(); for (int i = 0; i < resultList.size(); i++) {
-		 * System.out.println("\nName: " + resultList.get(i).getName() +
-		 * "\n Success flag: " + resultList.get(i).getSuccessFlag() +
-		 * "\n Reason for failing: " + resultList.get(i).getReasonForFailing());
-		 * } model.addAttribute("resultList", resultList);
-		 */
-
 		Environment environment = new Environment();
 		model.addAttribute("environment", environment);
 		return "display-report";
@@ -93,12 +70,6 @@ public class HomeController {
 		Report report = handler.runTests(project);
 		System.out.println("Report done running");
 		List<Result> resultList = report.getResultList();
-		for (int i = 0; i < resultList.size(); i++) {
-			System.out.println("\nName: " + resultList.get(i).getName()
-					+ "\n Success flag: " + resultList.get(i).getSuccessFlag()
-					+ "\n Reason for failing: "
-					+ resultList.get(i).getReasonForFailing());
-		}
 		return resultList;
 	}
 
