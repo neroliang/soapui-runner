@@ -46,7 +46,9 @@ public class SoapUIWrapperTest {
 					.getResultList().get(i).getTestCaseName())
 					&& (expectedReport.getResultList().get(i).getSuccessFlag() != actualReport
 							.getResultList().get(i).getSuccessFlag())) {
-				flag = false;
+				if (flag != false) {
+					flag = false;
+				}
 				System.out
 						.println("Error! "
 								+ actualReport.getResultList().get(i)
