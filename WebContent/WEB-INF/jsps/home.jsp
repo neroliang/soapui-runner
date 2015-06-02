@@ -11,11 +11,11 @@
 <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+	href="css/normalize.css">
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+	href="css/skeleton.css">
 <link rel="stylesheet"
-	href="https://dl.dropboxusercontent.com/u/10953187/custom.css">
+	href="css/custom.css">
 </head>
 <body>
 	<div class="container">
