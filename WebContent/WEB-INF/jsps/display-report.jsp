@@ -55,15 +55,15 @@
 					<tr>
 						<th>Name</th>
 						<th>Success Flag</th>
-						<th>Reason for Failing</th>
+						<th>Log</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${resultList}" var="element">
+					<c:forEach items="${report.resultList}" var="element">
 						<tr>
 							<td>${element.name}</td>
 							<td>${element.successFlag}</td>
-							<td>${element.reasonForFailing}</td>
+							<td>${element.log.content}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
