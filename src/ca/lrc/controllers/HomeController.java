@@ -49,7 +49,7 @@ public class HomeController {
 		}
 
 		else if (userChoice.equals("uat")) {
-			model.addAttribute("resultList",
+			model.addAttribute("report",
 					createUptimeReport("/ServiceUptime-soapui-project.xml"));
 		}
 
@@ -65,12 +65,10 @@ public class HomeController {
 		return "display-report";
 	}
 
-	public List<Result> createUptimeReport(String url) throws Exception {
+	public Report createUptimeReport(String url) throws Exception {
 		WsdlProject project = new WsdlProject(servletContext.getRealPath(url));
 		Report report = handler.runTests(project);
-		System.out.println("Report done running");
-		List<Result> resultList = report.getResultList();
-		return resultList;
+		return report;
 	}
 
 }
