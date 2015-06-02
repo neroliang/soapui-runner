@@ -1,7 +1,9 @@
-package ca.lrc.services;
+package ca.lrc.wrappers;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,10 +15,10 @@ import com.eviware.soapui.impl.wsdl.WsdlProject;
 import ca.lrc.beans.Report;
 import ca.lrc.beans.Result;
 
-public class SoapUIHandlerTest {
+public class SoapUIWrapperTest {
 	private List<Result> testResultList;
 	private Report expectedReport;
-	private SoapUIHandler handler;
+	private SoapUIWrapper handler;
 	private WsdlProject project;
 
 	@Test
@@ -24,7 +26,7 @@ public class SoapUIHandlerTest {
 		project = new WsdlProject("ServiceUptime-soapui-project.xml");
 		expectedReport = new Report();
 		testResultList = new ArrayList<Result>();
-		handler = new SoapUIHandler();
+		handler = new SoapUIWrapper();
 		Collections.addAll(testResultList, new Result("CommonLookup", true,
 				null), new Result("EasrInternal", true, null), new Result(
 				"EasrSubmission", true, null), new Result("ManageFormTemplate",
@@ -46,15 +48,22 @@ public class SoapUIHandlerTest {
 					.getResultList().get(i).getName())
 					&& (expectedReport.getResultList().get(i).getSuccessFlag() != actualReport
 							.getResultList().get(i).getSuccessFlag())) {
-				flag = false;
-				System.out.println("Error! "
-						+ actualReport.getResultList().get(i).getName()
-						+ " test case failed because of the following reason: "
-						+ actualReport.getResultList().get(i)
-								.getReasonForFailing());
+				if (flag != false) {
+					flag = false;
+				}
+				System.out
+						.println("Error! "
+								+ actualReport.getResultList().get(i).getName()
+								+ " test case failed. Error log being printed below.\n");
 			}
 		}
 
+		for (Result result : actualReport.getResultList()) {
+			if (result.getLog() != null) {
+				System.out.println(result.getLog().getContent());
+			}
+
+		}
 		assertTrue("Expected report does not match actual report.",
 				flag == true);
 	}

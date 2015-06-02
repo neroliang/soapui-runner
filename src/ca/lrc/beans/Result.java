@@ -3,13 +3,16 @@ package ca.lrc.beans;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 @Embeddable
 public class Result implements Serializable {
 	private static final long serialVersionUID = 835075094502273267L;
 	private String name;
 	private boolean successFlag;
-	private String reasonForFailing;
+
+	@Embedded
+	private Log log;
 
 	public String getName() {
 		return name;
@@ -27,22 +30,21 @@ public class Result implements Serializable {
 		this.successFlag = successFlag;
 	}
 
-	public String getReasonForFailing() {
-		return reasonForFailing;
+	public Log getLog() {
+		return log;
 	}
 
-	public void setReasonForFailing(String reasonForFailing) {
-		this.reasonForFailing = reasonForFailing;
+	public void setLog(Log log) {
+		this.log = log;
 	}
 
 	public Result() {
 	}
 
-	public Result(String name, boolean successFlag,
-			String reasonForFailing) {
+	public Result(String name, boolean successFlag, Log log) {
 		this.name = name;
 		this.successFlag = successFlag;
-		this.reasonForFailing = reasonForFailing;
+		this.log = log;
 	}
 
 }

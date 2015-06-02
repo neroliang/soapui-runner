@@ -22,4 +22,5 @@
 	<mvc:resources location="/"
 		mapping="/ServiceUptime-soapui-project.xml">
 	</mvc:resources>
+	<mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
 </beans>
