@@ -20,7 +20,7 @@
 <body>
 	<div class="container">
 		<section class="header">
-		<h1 class="title">
+		<h2 class="title">
 			SoapUI Runner
 			</h2>
 		</section>
