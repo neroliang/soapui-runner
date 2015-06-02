@@ -2,6 +2,8 @@ package ca.lrc.wrappers;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,8 +44,8 @@ public class SoapUIWrapperTest {
 		// Only works as intended if the status list in the actualResult object
 		// is ordered the same as that in the expectedResult object.
 		for (int i = 0; i < actualReport.getResultList().size(); i++) {
-			if ((expectedReport.getResultList().get(i).getTestCaseName() != actualReport
-					.getResultList().get(i).getTestCaseName())
+			if ((expectedReport.getResultList().get(i).getName() != actualReport
+					.getResultList().get(i).getName())
 					&& (expectedReport.getResultList().get(i).getSuccessFlag() != actualReport
 							.getResultList().get(i).getSuccessFlag())) {
 				if (flag != false) {
@@ -51,12 +53,17 @@ public class SoapUIWrapperTest {
 				}
 				System.out
 						.println("Error! "
-								+ actualReport.getResultList().get(i)
-										.getTestCaseName()
-								+ " test case failed. Check the relevant log for more details.");
+								+ actualReport.getResultList().get(i).getName()
+								+ " test case failed. Error log being printed below.\n");
 			}
 		}
 
+		for (Result result : actualReport.getResultList()) {
+			if (result.getLog() != null) {
+				System.out.println(result.getLog().getContent());
+			}
+
+		}
 		assertTrue("Expected report does not match actual report.",
 				flag == true);
 	}
