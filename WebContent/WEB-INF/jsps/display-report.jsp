@@ -59,11 +59,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${report.resultList}" var="element">
+					<c:forEach items="${report.resultList}" var="element" varStatus="loop">
 						<tr>
 							<td>${element.name}</td>
 							<td>${element.successFlag}</td>
-							<td>${element.log.content}</td>
+							<td>
+							<c:if test="${not empty element.log}">
+								<a href="<c:url value="/log/${loop.index}" />">View</a>
+							</c:if>
+								
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

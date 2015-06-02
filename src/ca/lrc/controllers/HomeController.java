@@ -1,24 +1,24 @@
 package ca.lrc.controllers;
 
-import java.util.List;
-
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ca.lrc.beans.Environment;
 import ca.lrc.beans.Report;
-import ca.lrc.beans.Result;
 import ca.lrc.wrappers.SoapUIWrapper;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 
 @Controller
+@SessionAttributes("report")
 public class HomeController {
 	// DAO dao = new DAO();
 
@@ -71,4 +71,11 @@ public class HomeController {
 		return report;
 	}
 
+	@RequestMapping(value = "log/{index}")
+	public String viewSubject(Model model, @ModelAttribute Report report, @PathVariable int index) {
+		String log = report.getResultList().get(index).getLog().getContent();
+		System.out.println(log);
+		model.addAttribute("log", log);
+		return "display-log";
+	}
 }
