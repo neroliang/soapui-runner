@@ -7,17 +7,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Result implements Serializable {
 	private static final long serialVersionUID = 835075094502273267L;
-	private String name;
+	private String testCaseName;
 	private boolean successFlag;
-	private String reasonForFailing;
 	private String logName;
 
-	public String getName() {
-		return name;
+	public String getTestCaseName() {
+		return testCaseName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTestCaseName(String name) {
+		this.testCaseName = name;
 	}
 
 	public boolean getSuccessFlag() {
@@ -26,14 +25,6 @@ public class Result implements Serializable {
 
 	public void setSuccessFlag(boolean successFlag) {
 		this.successFlag = successFlag;
-	}
-
-	public String getReasonForFailing() {
-		return reasonForFailing;
-	}
-
-	public void setReasonForFailing(String reasonForFailing) {
-		this.reasonForFailing = reasonForFailing;
 	}
 
 	public String getLogName() {
@@ -47,12 +38,11 @@ public class Result implements Serializable {
 	public Result() {
 	}
 
-	public Result(String name, boolean successFlag, String reasonForFailing,
-			String logName) {
-		this.name = name;
+	public Result(String name, boolean successFlag, String logName) {
+		this.testCaseName = name;
 		this.successFlag = successFlag;
-		this.reasonForFailing = reasonForFailing;
 		this.logName = logName;
 	}
 
+	
 }
