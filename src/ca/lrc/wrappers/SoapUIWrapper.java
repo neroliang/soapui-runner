@@ -23,12 +23,13 @@ public class SoapUIWrapper {
 	private TestCaseRunner runner;
 	private List<Result> resultList;
 	private StringWriter sw;
-	
+
 	public Report runTests(WsdlProject project) throws Exception {
-		report = new Report();
 		SoapUI.setSoapUICore(new StandaloneSoapUICore(true));
+		report = new Report();
 		resultList = new ArrayList<Result>();
 		sw = new StringWriter();
+		pw = new PrintWriter(sw);
 
 		for (int i = 0; i < project.getTestSuiteAt(0).getTestCaseList().size(); i++) {
 			result = new Result();
@@ -38,16 +39,14 @@ public class SoapUIWrapper {
 					.run(new PropertiesMap(), false);
 			if (runner.getStatus() == Status.FAILED) {
 				result.setSuccessFlag(false);
-				pw = new PrintWriter(sw);
 				runner.getResults().get(0).writeTo(pw);
-				result.setLog(new Log ( sw.toString() ));
-				pw.flush();
-				sw.flush();
-				pw.close();
-				sw.close();
+				result.setLog(new Log(sw.toString()));
 			}
 			resultList.add(result);
 		}
+
+		pw.close();
+		sw.close();
 
 		report.setResultList(resultList);
 		return report;
