@@ -40,7 +40,7 @@ public class SoapUIWrapperTest {
 
 		boolean flag = true;
 		System.out
-				.println("Now comparing actual result against expected result. If no error messages are thrown, all is well.");
+				.println("\nNow comparing actual result against expected result. If no error messages are thrown, all is well.");
 		// Only works as intended if the status list in the actualResult object
 		// is ordered the same as that in the expectedResult object.
 		for (int i = 0; i < actualReport.getResultList().size(); i++) {
@@ -51,19 +51,20 @@ public class SoapUIWrapperTest {
 				if (flag != false) {
 					flag = false;
 				}
-				System.out
-						.println("Error! "
-								+ actualReport.getResultList().get(i).getName()
-								+ " test case failed. Error log being printed below.\n");
 			}
 		}
-
+		
 		for (Result result : actualReport.getResultList()) {
 			if (result.getLog() != null) {
+				System.out
+						.println("\nError! "
+								+ result.getName()
+								+ " test case failed. Error log being printed below.\n");
 				System.out.println(result.getLog().getContent());
 			}
 
 		}
+
 		assertTrue("Expected report does not match actual report.",
 				flag == true);
 	}
