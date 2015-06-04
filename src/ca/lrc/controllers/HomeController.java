@@ -27,13 +27,8 @@ public class HomeController {
 	@Autowired
 	ServletContext servletContext;
 
-	@RequestMapping("/")
-	public String showHome(Model model) {
-		return "home";
-	}
-
-	@RequestMapping("new-uptime-report")
-	public String showDisplayReport(Model model) throws Exception {
+	@RequestMapping(value = { "/", "new-uptime-report" })
+	public String showDisplayReport(Model model) {
 		Environment environment = new Environment();
 		model.addAttribute("environment", environment);
 		return "display-report";
@@ -43,12 +38,7 @@ public class HomeController {
 	public String processEnvironmentSelection(Model model,
 			@ModelAttribute Environment environment) throws Exception {
 		String userChoice = environment.getSelection();
-		if (userChoice.equals("dev")) {
-			System.out
-					.println("SoapUI project for development environment hasn't been acquired yet.");
-		}
-
-		else if (userChoice.equals("uat")) {
+		if (userChoice.equals("uat")) {
 			model.addAttribute("report",
 					createUptimeReport("/ServiceUptime-soapui-project.xml"));
 		}
@@ -72,7 +62,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "log/{index}")
-	public String viewSubject(Model model, @ModelAttribute Report report, @PathVariable int index) {
+	public String viewSubject(Model model, @ModelAttribute Report report,
+			@PathVariable int index) {
 		String log = report.getResultList().get(index).getLog().getContent();
 		System.out.println(log);
 		model.addAttribute("log", log);
