@@ -18,7 +18,7 @@ import ca.lrc.beans.Result;
 public class SoapUIWrapperTest {
 	private List<Result> testResultList;
 	private Report expectedReport;
-	private SoapUIWrapper handler;
+	private SoapUIWrapper wrapper;
 	private WsdlProject project;
 
 	@Test
@@ -26,7 +26,7 @@ public class SoapUIWrapperTest {
 		project = new WsdlProject("ServiceUptime-soapui-project.xml");
 		expectedReport = new Report();
 		testResultList = new ArrayList<Result>();
-		handler = new SoapUIWrapper();
+		wrapper = new SoapUIWrapper();
 		Collections.addAll(testResultList, new Result("CommonLookup", true,
 				null), new Result("EasrInternal", true, null), new Result(
 				"EasrSubmission", true, null), new Result("ManageFormTemplate",
@@ -36,7 +36,7 @@ public class SoapUIWrapperTest {
 				new Result("EcmManagement", true, null), new Result(
 						"ExternalSecurity", true, null));
 		expectedReport.setResultList(testResultList);
-		Report actualReport = handler.runTests(project);
+		Report actualReport = wrapper.runTests(project);
 
 		boolean flag = true;
 		System.out
