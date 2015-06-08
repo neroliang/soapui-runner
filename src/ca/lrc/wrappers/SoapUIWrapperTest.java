@@ -36,6 +36,7 @@ public class SoapUIWrapperTest {
 				new Result("EcmManagement", true, null), new Result(
 						"ExternalSecurity", true, null));
 		expectedReport.setResultList(testResultList);
+		
 		Report actualReport = wrapper.runTests(project);
 
 		boolean flag = true;
@@ -43,17 +44,28 @@ public class SoapUIWrapperTest {
 				.println("\nNow comparing actual result against expected result. If no error messages are thrown, all is well.");
 		// Only works as intended if the status list in the actualResult object
 		// is ordered the same as that in the expectedResult object.
-		for (int i = 0; i < actualReport.getResultList().size(); i++) {
-			if ((expectedReport.getResultList().get(i).getName() != actualReport
-					.getResultList().get(i).getName())
-					&& (expectedReport.getResultList().get(i).getSuccessFlag() != actualReport
-							.getResultList().get(i).getSuccessFlag())) {
+		for (int testCaseIndex = 0; testCaseIndex < actualReport
+				.getResultList().size(); testCaseIndex++) {
+			
+			String expectedTestCaseName = expectedReport.getResultList()
+					.get(testCaseIndex).getName();
+			String actualTestCaseName = actualReport.getResultList()
+					.get(testCaseIndex).getName();
+
+			boolean expectedSuccessFlag = expectedReport.getResultList()
+					.get(testCaseIndex).getSuccessFlag();
+			boolean actualSuccessFlag = actualReport.getResultList()
+					.get(testCaseIndex).getSuccessFlag();
+
+			if ((expectedTestCaseName != actualTestCaseName)
+					&& (expectedSuccessFlag != actualSuccessFlag)) {
+				// In case more than one test step fails, a check has been added to prevent the flag from being set as false more than once
 				if (flag != false) {
 					flag = false;
 				}
 			}
 		}
-		
+
 		for (Result result : actualReport.getResultList()) {
 			if (result.getLog() != null) {
 				System.out
