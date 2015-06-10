@@ -1,4 +1,4 @@
-package ca.lrc.wrappers;
+package ca.lrc.controllers;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -16,7 +16,7 @@ import com.eviware.soapui.model.support.PropertiesMap;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
 
-public class SoapUIWrapper {
+public class SoapUIController {
 	private Report report;
 	private Result result;
 	private PrintWriter pw;

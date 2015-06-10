@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import ca.lrc.beans.Environment;
 import ca.lrc.beans.Report;
-import ca.lrc.wrappers.SoapUIWrapper;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 
@@ -22,7 +21,7 @@ import com.eviware.soapui.impl.wsdl.WsdlProject;
 public class HomeController {
 	// DAO dao = new DAO();
 
-	private SoapUIWrapper handler = new SoapUIWrapper();
+	private SoapUIController handler = new SoapUIController();
 
 	@Autowired
 	ServletContext servletContext;
