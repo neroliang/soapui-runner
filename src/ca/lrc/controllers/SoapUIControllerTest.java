@@ -45,9 +45,7 @@ public class SoapUIControllerTest {
 	@Test
 	public void testExpectedReportMatchesActualReport() {
 		boolean flag = true;
-		System.out
-				.println("\nNow comparing actual result against expected result. If no error messages are thrown, all is well.");
-
+		
 		/*
 		 * Only works as intended if the status list in the actualResult object
 		 * is ordered the same as that in the expectedResult object.
@@ -95,15 +93,13 @@ public class SoapUIControllerTest {
 			}
 		}
 
-		if (!flag) {
-			testIfErrorLogsExist();
-		}
-
 		assertTrue("Expected report does not match actual report.",
 				flag == true);
 	}
 
-	public void testIfErrorLogsExist() {
+	@Test
+	public void testErrorLogsDoNotExist() {
+		boolean flag = true;
 		for (Result result : actualReport.getResultList()) {
 			if (result.getLog() != null) {
 				System.out
@@ -113,5 +109,8 @@ public class SoapUIControllerTest {
 				System.out.println(result.getLog().getContent());
 			}
 		}
+		
+		assertTrue("Error logs exist.",
+				flag == true);
 	}
 }
