@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ca.lrc.beans.Report;
@@ -15,14 +15,14 @@ import ca.lrc.beans.Result;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 
 public class SoapUIControllerTest {
-	private List<Result> expectedResultList;
-	private Report expectedReport;
-	private Report actualReport;
-	private SoapUIController wrapper;
-	private WsdlProject project;
+	private static List<Result> expectedResultList;
+	private static Report expectedReport;
+	private static Report actualReport;
+	private static SoapUIController wrapper;
+	private static WsdlProject project;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		expectedReport = new Report();
 		expectedResultList = new ArrayList<Result>();
 
@@ -45,7 +45,7 @@ public class SoapUIControllerTest {
 	@Test
 	public void testExpectedReportMatchesActualReport() {
 		boolean flag = true;
-		
+
 		/*
 		 * Only works as intended if the status list in the actualResult object
 		 * is ordered the same as that in the expectedResult object.
@@ -109,8 +109,7 @@ public class SoapUIControllerTest {
 				System.out.println(result.getLog().getContent());
 			}
 		}
-		
-		assertTrue("Error logs exist.",
-				flag == true);
+
+		assertTrue("Error logs exist.", flag == true);
 	}
 }
